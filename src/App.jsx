@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Globe, Code, Mail, ExternalLink, ChevronDown, User, Briefcase, Send, GraduationCap, Building, Bot, Wrench, Video, Award } from 'lucide-react';
-import AIChatWidget from './components/AIChatWidget';
+import { Globe, Code, Mail, ExternalLink, ChevronDown, User, Briefcase, Send, GraduationCap, Building, Wrench, Video, Award } from 'lucide-react';
 import profileImage from './assets/Gemini_Generated_Image_p6s0fnp6s0fnp6s0.png';
 import certificateImage from './assets/Screenshot 2026-04-19 153152.png';
 
@@ -13,13 +12,13 @@ const portfolioData = {
   role: "AI & Full Stack Developer",
   tagline: "I love to make modern solutions for the companies. I am a quick learner and can pick up new technologies easily. I am also a team player and enjoy working in a collaborative environment.",
   about: "I'm a passionate AI & Full Stack Developer. I worked as an Intern in ARGA Investment Management & SNS iHub. I worked in various projects like Sentimental Analysis, NLP to SQL, Chatbots and Image Classification. Beyond coding, I have a strong creative interest in video editing and motion graphics using Adobe After Effects.",
-  email: "https://gmail.com/",
+  email: "kevin.tech6868@gmail.com",
   socials: {
     github: "https://github.com/Kevin-tech6868",
     linkedin: "https://www.linkedin.com/in/kevin-p-/",
   },
   skills: [
-    "HTML", "CSS", "JavaScript", "Python", "SQL", "React", "MongoDB", 
+    "HTML", "CSS", "JavaScript", "Python", "SQL", "React", "MongoDB",
     "Tailwind CSS", "GitHub"
   ],
   education: [
@@ -91,6 +90,19 @@ const portfolioData = {
 function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+  const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
+
+  const handleContactChange = (event) => {
+    const { name, value } = event.target;
+    setContactForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleContactSubmit = (event) => {
+    event.preventDefault();
+    const subject = `Portfolio contact from ${contactForm.name}`;
+    const body = `Name: ${contactForm.name}%0D%0AEmail: ${contactForm.email}%0D%0A%0D%0A${contactForm.message}`;
+    window.location.href = `mailto:${portfolioData.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+  };
 
   // Handle scroll events for navbar styling
   useEffect(() => {
@@ -115,7 +127,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-dark-900 text-slate-200 selection:bg-primary-500 selection:text-white font-sans relative">
-      
+
       {/* Background Effect */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-600/20 rounded-full blur-[120px]"></div>
@@ -130,10 +142,10 @@ function App() {
           </a>
           <div className="hidden md:flex gap-8">
             {navLinks.map((link) => (
-              <a 
-                key={link.name} 
+              <a
+                key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-300 hover:text-white hover:text-primary-400 transition-colors"
+                className="text-sm font-medium text-slate-300 hover:text-primary-400 transition-colors"
               >
                 {link.name}
               </a>
@@ -144,7 +156,7 @@ function App() {
 
       {/* Main Content */}
       <main className="relative z-10">
-        
+
         {/* HERO SECTION */}
         <section id="home" className="min-h-screen flex items-center justify-center px-6 md:px-12 pt-20">
           <div className="max-w-4xl w-full">
@@ -157,8 +169,8 @@ function App() {
                 <Code className="w-5 h-5" /> Hi, my name is
               </h2>
             </motion.div>
-            
-            <motion.h1 
+
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -166,8 +178,8 @@ function App() {
             >
               {portfolioData.name}.
             </motion.h1>
-            
-            <motion.h2 
+
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -175,8 +187,8 @@ function App() {
             >
               {portfolioData.role}.
             </motion.h2>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -184,8 +196,8 @@ function App() {
             >
               {portfolioData.tagline}
             </motion.p>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -199,8 +211,8 @@ function App() {
               </a>
             </motion.div>
           </div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
@@ -219,7 +231,7 @@ function App() {
               <span className="text-primary-500 font-mono text-xl">01.</span> About Me
               <div className="h-px bg-white/10 flex-grow ml-4"></div>
             </h2>
-            
+
             <div className="grid md:grid-cols-5 gap-12 items-start">
               <div className="md:col-span-3 text-slate-300 space-y-6 leading-relaxed text-lg">
                 <p>{portfolioData.about}</p>
@@ -249,7 +261,7 @@ function App() {
               <span className="text-primary-500 font-mono text-xl">02.</span> My Education
               <div className="h-px bg-white/10 flex-grow ml-4"></div>
             </h2>
-            
+
             <div className="space-y-8">
               {portfolioData.education.map((edu, index) => (
                 <div key={index} className="relative pl-8 md:pl-0">
@@ -290,11 +302,11 @@ function App() {
               <span className="text-primary-500 font-mono text-xl">03.</span> Internships
               <div className="h-px bg-white/10 flex-grow ml-4"></div>
             </h2>
-            
+
             <div className="space-y-8">
               {portfolioData.internships.map((internship, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   whileHover={{ x: 5 }}
                   className="glass-card p-8 border-l-4 border-l-primary-500 hover:border-white/10 transition-colors"
                 >
@@ -325,12 +337,12 @@ function App() {
               <span className="text-primary-500 font-mono text-xl">04.</span> Internship Certificate
               <div className="h-px bg-white/10 flex-grow ml-4"></div>
             </h2>
-            
+
             <div className="glass-card p-4 md:p-8 rounded-2xl border-white/5 hover:border-primary-500/50 transition-colors group">
               <div className="relative aspect-video rounded-xl overflow-hidden bg-dark-900 flex items-center justify-center">
-                <img 
-                  src={certificateImage} 
-                  alt="Internship Certificate" 
+                <img
+                  src={certificateImage}
+                  alt="Internship Certificate"
                   className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -354,7 +366,7 @@ function App() {
               <span className="text-primary-500 font-mono text-xl">05.</span> My Toolkit
               <div className="h-px bg-white/10 flex-grow ml-4"></div>
             </h2>
-            
+
             <div className="relative flex overflow-hidden mask-image-gradient">
               <div className="flex animate-scroll gap-8 min-w-full hover:[animation-play-state:paused]">
                 {/* Render tools twice for seamless infinite scroll */}
@@ -369,10 +381,10 @@ function App() {
                     'text-orange-400 border-orange-400/30 hover:border-orange-400/60 hover:bg-orange-400/10 hover:shadow-lg hover:shadow-orange-400/20'
                   ];
                   const colorClass = colors[index % colors.length];
-                  
+
                   return (
-                    <div 
-                      key={index} 
+                    <div
+                      key={index}
                       className={`flex-none px-8 py-4 glass-card rounded-full whitespace-nowrap font-mono text-lg flex items-center transition-all duration-300 cursor-default border bg-dark-800/50 ${colorClass}`}
                     >
                       {tool}
@@ -391,10 +403,10 @@ function App() {
               <span className="text-primary-500 font-mono text-xl">06.</span> Editing Software
               <div className="h-px bg-white/10 flex-grow ml-4"></div>
             </h2>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {portfolioData.editingSoftware.map((software, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   whileHover={{ scale: 1.05 }}
                   className="glass-card p-6 flex flex-col items-center justify-center text-center hover:border-primary-500/50 transition-colors"
@@ -415,10 +427,10 @@ function App() {
               <span className="text-primary-500 font-mono text-xl">07.</span> Some Things I've Built
               <div className="h-px bg-white/10 flex-grow ml-4"></div>
             </h2>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {portfolioData.projects.map((project, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   whileHover={{ y: -5 }}
                   className="glass-card p-8 flex flex-col h-full hover:border-primary-500/30 transition-colors group"
@@ -452,21 +464,22 @@ function App() {
             <h2 className="text-primary-500 font-mono text-lg mb-4">08. What's Next?</h2>
             <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Get In Touch</h3>
             <p className="text-lg text-slate-400 mb-10 leading-relaxed">
-              Although I'm not currently looking for any new opportunities, my inbox is always open. 
+              Although I'm not currently looking for any new opportunities, my inbox is always open.
               Whether you have a question or just want to say hi, I'll try my best to get back to you!
             </p>
             <div className="flex flex-col items-center gap-8">
-              <button 
-                onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('open-chat')); }}
-                className="btn-primary px-8 py-4 text-lg flex items-center gap-3 shadow-lg shadow-primary-500/20"
-              >
-                <Bot className="w-5 h-5" /> Chat with my AI
-              </button>
-              
+
               <div className="flex justify-center gap-6 mt-4">
-                <a href={`mailto:${portfolioData.email}`} className="text-slate-400 hover:text-primary-400 transition-colors bg-dark-800 border border-white/5 p-4 rounded-full hover:border-primary-500/50 hover:bg-primary-500/10 shadow-lg">
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=kevinworkpersonal@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-primary-400 transition-colors bg-dark-800 border border-white/5 p-4 rounded-full hover:border-primary-500/50 hover:bg-primary-500/10 shadow-lg"
+                >
                   <Mail className="w-6 h-6" />
                 </a>
+
+
                 <a href={portfolioData.socials.github} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-primary-400 transition-colors bg-dark-800 border border-white/5 p-4 rounded-full hover:border-primary-500/50 hover:bg-primary-500/10 shadow-lg">
                   <Code className="w-6 h-6" />
                 </a>
@@ -486,8 +499,7 @@ function App() {
         <p>Built with React & Tailwind CSS</p>
       </footer>
 
-      {/* AI Chat Widget */}
-      <AIChatWidget />
+
     </div>
   );
 }
